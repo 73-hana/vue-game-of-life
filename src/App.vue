@@ -1,9 +1,9 @@
 <template>
-  <button @click="randomCell" :disabled="buttonStatus.random">random</button>
-  <button @click="startLife" :disabled="buttonStatus.start">start</button>
-  <button @click="stopLife" :disabled="buttonStatus.stop">stop</button>
-  <button @click="resetField" :disabled="buttonStatus.reset">reset</button>
   <div id="playField">
+    <button @click="randomCell" :disabled="buttonStatus.random">random</button>
+    <button @click="startLife" :disabled="buttonStatus.start">start</button>
+    <button @click="stopLife" :disabled="buttonStatus.stop">stop</button>
+    <button @click="resetField" :disabled="buttonStatus.reset">reset</button>
     <p v-for="row in FIELD" v-bind:key="row.key">
       <span v-for="block in row.arr" v-bind:key="block.key">
         {{ block.icon }}
@@ -17,7 +17,7 @@
 import { ref } from "vue";
 // フィールドの設定
 const FIELD_WIDTH = 30;
-const FIELD_HEIGHT = 80;
+const FIELD_HEIGHT = 50;
 const DENSITY = 40;
 const SPEED = 100;
 // フィールドの状態を管理するref
@@ -174,27 +174,23 @@ function renderField() {
   for (let y = 0; y < FIELD_HEIGHT; y++) {
     for (let x = 0; x < FIELD_WIDTH; x++) {
       if (FIELD.value[y].arr[x].isAlive) {
-        FIELD.value[y].arr[x].icon = "■";
+        FIELD.value[y].arr[x].icon = "黒";
       } else {
         FIELD.value[y].arr[x].icon = "・";
       }
     }
   }
-  FIELD.value[cursorY].arr[cursorX].icon = "◎";
+  FIELD.value[cursorY].arr[cursorX].icon = "的";
 }
 </script>
 
 <style scoped>
 p {
-  font-size: 1rem;
-  line-height: 6px;
+  text-align: center;
+  font-family: monospace;
   margin: 0;
   padding: 0;
-}
-span {
-  margin: 0;
-  padding: 0;
-  line-height: 6px;
-  font-size: 6px;
+  font-size: 10px;
+  line-height: 10px;
 }
 </style>
